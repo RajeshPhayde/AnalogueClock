@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analogue Clock</title>
+</head>
+<body>
+
+    <div id="sec"></div>
+    <div id="min"></div>
+    <div id="hr"></div>
+
+    <img src="./clock.png" alt="">
+
+    <style>
+        *{
+            margin: 0px;
+        }
+        body{
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(135deg, rgb(129, 129, 121), rgb(0, 158, 250), cyan);
+        }
+        img{
+            z-index: -1;
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            filter: drop-shadow(0px 0px 100px rgb(255, 255, 255));
+        }
+        #sec{
+            width: 2px;
+            height: 320px;
+            background: linear-gradient(black 0%, black 60% , transparent 55% , transparent 100%);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            /* transition: 1.5s; */
+        }
+        #min{
+            width: 2px;
+            height: 260px;
+            background: linear-gradient(rgb(28, 104, 167) 0%, rgb(28, 104, 167) 47% , transparent 47% , transparent 100%);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        #hr{
+            width: 2px;
+            height: 200px;
+            background: linear-gradient(rgb(104, 28, 167) 0%, rgb(104, 28, 167) 47% , transparent 47% , transparent 100%);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        @media (max-width: 500px){
+           img{
+                width: 300px;
+                height: 300px;
+           }
+           #sec{
+                height: 230px;
+           }
+           #hr{
+                height: 130px;
+           }
+           #min{
+                height: 200px;
+           }
+        }
+    </style>
+    <script>
+        function displayTime()
+        {
+            let current = new Date();
+            let sec = current.getSeconds();
+            let min = current.getMinutes();
+            let hr = current.getHours();
+
+            let second = document.getElementById("sec");
+            second.style.transform = `translate(-50%, -50%) rotate(${sec * 6}deg)`;
+
+            let minute = document.getElementById("min");
+            minute.style.transform = `translate(-50%, -50%) rotate(${(sec*0.1) + (min*6)}deg)`;
+
+            let hour = document.getElementById("hr");
+            hour.style.transform = `translate(-50%, -50%) rotate(${(min*0.5) + (hr*30)}deg)`;
+        }
+
+        setInterval(displayTime , 1000);
+    </script>
+    
+</body>
+</html>
